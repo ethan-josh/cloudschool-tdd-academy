@@ -38,6 +38,7 @@ class ZooControllerTest {
     @DisplayName("GET /api/zoos/{id} should return zoo when it exists")
     void shouldReturnZooWhenItExists() throws Exception {
         // TODO: Complete this test
+        // DONE
         // 1. Use mockMvc.perform(get("/api/zoos/1")) to make a GET request
         // 2. Add expectations for:
         //    - status().isOk()
@@ -48,10 +49,14 @@ class ZooControllerTest {
         //    - jsonPath("$.description").value("A beautiful zoo in the heart of Manila")
         
         // Your code here:
-        // mockMvc.perform(get("/api/zoos/1"))
-        //     .andExpect(...)
-        //     .andExpect(...)
-        //     .andExpect(...);
+         mockMvc.perform(get("/api/zoos/1"))
+             .andExpect(status().isOk())
+             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+             .andExpect(jsonPath("$.id").value(1))
+             .andExpect(jsonPath("$.name").value("Manila Zoo"))
+             .andExpect(jsonPath("$.location").value("Manila, Philippines"))
+             .andExpect(jsonPath("$.description").value("A beautiful zoo in the heart of Manila"));
+
     }
 
     @Test
@@ -62,7 +67,8 @@ class ZooControllerTest {
         // 2. Add expectation for status().isNotFound()
         
         // Your code here:
-        // mockMvc.perform(get("/api/zoos/999"))
-        //     .andExpect(...);
+         mockMvc.perform(get("/api/zoos/999"))
+             .andExpect(status().isNotFound());
+
     }
 } 
